@@ -48,6 +48,8 @@ parent(isabella, liam).
 parent(isabella, sarah).
 parent(isabella, jacob).
 parent(jack, liam).
+parent(jack, sarah).
+parent(jack, jacob).
 parent(olivia, samantha).
 parent(connor, samantha).
 
