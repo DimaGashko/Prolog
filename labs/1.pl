@@ -54,3 +54,4 @@ parent(connor, samantha).
 matherInLaw(M,H) :- woman(M), (couple(H,K) ; couple(K,H)), parent(M,K).
 
 matherInLawAll(M) :- matherInLaw(M, X), write(X), nl, fail.
+matherInLawFirst(M) :- matherInLaw(M, X), write(X), !.
