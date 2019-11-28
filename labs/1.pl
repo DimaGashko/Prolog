@@ -41,4 +41,4 @@ parent(jack, liam).
 parent(olivia, samantha).
 parent(connor, samantha).
 
-mather_in_law(M, H) :- woman(M), couple(H, K), parent(M, K)
+matherInLaw(M,H) :- woman(M), (couple(H,K) ; couple(K,H)), parent(M,K).
