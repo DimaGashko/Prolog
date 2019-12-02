@@ -60,7 +60,6 @@ matherInLawFirst(M) :- matherInLaw(M, X), write(X), !.
 
 
 
-
-# bagof(X,parent(X,_),L)
-# setof(X,parent(X,_),L)
-# findall(X,parent(X,_),L)
+% bagof(X,parent(X,_),L)
+% setof(X,parent(X,_),L)
+% findall(X,parent(X,_),L)
