@@ -1,25 +1,25 @@
-man(oliver).
-man(jake).
-man(noah).
-man(james).
-man(jack).
-man(connor).
-man(liam).
-man(john).
-man(william).
-man(jacob).
+male(oliver).
+male(jake).
+male(noah).
+male(james).
+male(jack).
+male(connor).
+male(liam).
+male(john).
+male(william).
+male(jacob).
 
-woman(amelia).
-woman(margaret).
-woman(emma).
-woman(mary).
-woman(emily).
-woman(isabella).
-woman(olivia).
-woman(samantha).
-woman(sarah).
-woman(tracy).
-woman(ava).
+female(amelia).
+female(margaret).
+female(emma).
+female(mary).
+female(emily).
+female(isabella).
+female(olivia).
+female(samantha).
+female(sarah).
+female(tracy).
+female(ava).
 
 couple(oliver, amelia).
 couple(jake, margaret).
@@ -53,7 +53,7 @@ parent(jack, jacob).
 parent(olivia, samantha).
 parent(connor, samantha).
 
-matherInLaw(M,H) :- woman(M), (couple(H,K) ; couple(K,H)), parent(M,K).
+matherInLaw(M,H) :- female(M), (couple(H,K) ; couple(K,H)), parent(M,K).
 
 matherInLawAll(M) :- matherInLaw(M, X), write(X), nl, fail.
 matherInLawFirst(M) :- matherInLaw(M, X), write(X), !.

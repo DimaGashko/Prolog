@@ -16,7 +16,7 @@ printLine :- format("|~`-t~70||~n").
 
 printList([S|T], N) :- printStudent(S, N), printLine(), K is N + 1, printList(T, K).
 
-p :- printTHead(), setof(N, hasBadGrades(N), L), printList(L, 1).
+printFaildStudents :- printTHead(), setof(N, hasBadGrades(N), L), printList(L, 1).
 
 student(1050, adams, ['math/4', 'c++/3', 'oop/4', 'physics/3']).
 student(2100, alexander, ['math/3', 'c++/2', 'oop/4', 'physics/3']).
