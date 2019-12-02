@@ -10,11 +10,11 @@ almostPass([_, N, _]) :- student(_, N, [_, 'c++/4' | _] ).
 
 % printStudent(S) :- 
 
-% print_list([],N) :- write('Total: '), write(N), !.
+print_list([],N) :- write('Total: '), write(N), !.
 
-% print_list([X|T], N):- write(N), write('.'), tab(2), write(X),nl, K is N + 1, print_list(T, K).
+printList([_|T], N):- write(N), write('.'), tab(2),nl, K is N + 1, printList(T, K).
 
-p :- setof(N, almostPass(N), S).
+p :- setof(N, almostPass(N), S), printList(S, 1).
 
 student(1050, adams, ['math/4', 'c++/3', 'oop/4', 'physics/3']).
 student(2100, alexander, ['math/3', 'c++/2', 'oop/4', 'physics/3']).
