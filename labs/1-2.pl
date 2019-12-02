@@ -57,3 +57,10 @@ matherInLaw(M,H) :- woman(M), (couple(H,K) ; couple(K,H)), parent(M,K).
 
 matherInLawAll(M) :- matherInLaw(M, X), write(X), nl, fail.
 matherInLawFirst(M) :- matherInLaw(M, X), write(X), !.
+
+
+
+
+# bagof(X,parent(X,_),L)
+# setof(X,parent(X,_),L)
+# findall(X,parent(X,_),L)
