@@ -1,4 +1,19 @@
 
+gool_math(X) :- student(_, X, [_, 'c++/4' | _] ).
+
+printLine :- format("|~`-t~62||~n").
+
+printTHead :-
+   printLine(),
+   format("| ~a~t~3+ | ~a~t~4+ | ~a~t~10+ | ~a~t~40+ |~n", ['#', group, name, grades]),
+   printLine().
+
+
+print_list([],N) :- write('Total: '), write(N), !.
+
+print_list([X|T], N):- write(N), write('.'), tab(2), write(X),nl, K is N + 1, print_list(T, K).
+
+p :- setof(X, gool_math(X), L), print_list(L,1).
 
 student(1050, adams, ['math/4', 'c++/3', 'oop/4', 'physics/3']).
 student(2100, alexander, ['math/3', 'c++/2', 'oop/4', 'physics/3']).
