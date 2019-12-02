@@ -1,5 +1,5 @@
 
-almostPass([_, N, _]) :- student(_, N, [_, 'c++/4' | _] ).
+almostPass(N) :- student(_, N, [_, 'c++/4' | _] ).
 
 printLine :- format("|~`-t~70||~n").
 
@@ -8,14 +8,13 @@ printTHead :-
    format("| ~a~t~5+ | ~a~t~4+ | ~a~t~16+ | ~a~t~40+ |~n", ['#', group, name, grades]),
    printLine().
 
-printStudent([_, R, _], N) :- 
-   format("| ~a~t~5+ | ~a~t~4+ | ~a~t~16+ | ~a~t~40+ |~n", [N, group, R, grades]).
 
-print_list([],N) :- write('Total: '), write(N), !.
+printStudent(N, I) :- student(G, N, [M, C, O, P]),
+   format("| ~a~t~5+ | ~a~t~5+ | ~a~t~16+ | ~a, ~a, ~a, ~a~t~40+ |~n", [I, G, N, M, C, O, P]).
 
 printList([S|T], N):- printStudent(S, N), printLine(), K is N + 1, printList(T, K).
 
-p :- printTHead(), setof(N, almostPass(N), S), printList(S, 1).
+p :- printTHead(), setof(N, almostPass(N), L), printList(L, 1).
 
 student(1050, adams, ['math/4', 'c++/3', 'oop/4', 'physics/3']).
 student(2100, alexander, ['math/3', 'c++/2', 'oop/4', 'physics/3']).
