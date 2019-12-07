@@ -17,13 +17,16 @@ guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
 
 % Run, Read, Save
 run :- write('Loading data... '),
+   (exists_file('db.txt'); write('Can\'t load data. DB file not found'), nl, fail),
    see('db.txt'), read(X), readNext(X), seen(), 
-   nl, nl, guide.
+   nl, nl, guide, !.
 
 readNext(end_of_file) :- done, nl, !.
 readNext(X) :- assert(X), read(Y), readNext(Y).
 
-save :- write('Saving...'), tell('db.txt'),
+save :- write('Saving...'),
+   (exists_file('db.txt'); write('Can\'t save data. DB file not found'), nl, fail),
+   tell('db.txt'),
    findall(EmplId, employee(EmplId, _, _, _, _), EmplL), saveEmployees(EmplL), 
    findall(PosId, position(PosId, _, _), PosL), savePositions(PosL), 
    told(), done, nl, !.
