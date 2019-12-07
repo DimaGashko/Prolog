@@ -23,16 +23,16 @@ run :- write('Loading... '),
 readNext(end_of_file) :- done, nl, !.
 readNext(X) :- assert(X), read(Y), readNext(Y).
 
-save :- write('Saving...'), tell('db.txt'), 
-   saveEmployees, 
-   savePositions, 
+save :- write('Saving...'), tell('db.txt'),
+   findall(EmplId, employee(EmplId, _, _, _, _), EmplL), saveEmployees(EmplL), 
+   findall(PosId, position(PosId, _, _), PosL), savePositions(PosL), 
    told(), done, nl, !.
 
-saveEmployees :- employee(Id, PosId, FN, LN, Birth), 
-   write(employee(Id, PosId, FN, LN, Birth)), nl, saveEmployees.
+saveEmployees([]) :- !.
+saveEmployees([Id|T]) :- write(Id), nl, saveEmployees(T).
 
-savePositions :- position(Id, Name, Salary), 
-   write(position(Id, Name, Salary)), nl, savePositions.
+savePositions([]) :- !.
+savePositions([Id|T]) :- write(Id), nl, savePositions(T).
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
