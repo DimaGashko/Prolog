@@ -15,8 +15,8 @@ empl(Id) :- employee(Id, PosId, FN, LN, Birth),
 emplDel(Id) :- retract(employee(Id, _, _, _, _)).
 
 emplAdd(Id, PosId, FN, LN, Birth) :- (not(employee(Id, _, _, _, _)); write('Employee already exist. Use ?- emplEdit() instead'), nl, fail),
-   (position(PosId, _, _); write('Position not found'), nl, !),
-  % assert(employee[Id, PosId, FN, LN, Birth]),
+   (position(PosId, _, _); write('Position not found'), nl, fail),
+   assert(employee(Id, PosId, FN, LN, Birth)),
    write('ok'), !.
 
 emplLine() :- format('|~`-t~71||~n').
