@@ -1,11 +1,25 @@
+:-dynamic employee/5, position/3.
 
 guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('Available predicates:'), nl,
    write('?- empl(Id) :- print employee by its id'), nl.
 
+% Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
    position(PosId, PosName, Salary),
-   format('~a ~a: ~a, ~a, $~a', [FN, LN, Birth, PosName, Salary]).
+   format('| ~a~t~5+ | ~a ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n', [Id, FN, LN, Birth, PosName, Salary]).
+
+emplAll() :- emplLine, emplHead, emplLine, empl(_), emplLine, fail.
+emplHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n', ['Id', 'Name', 'Birthday', 'Position', 'Salary']).
+emplLine() :- format('|~`-t~71||~n').
+
+% Position
+pos(Id) :- position(Id, Name, Salary), 
+   format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', [Id, Name, Salary]).
+
+posAll() :- posLine, posHead, posLine, pos(_), posLine, fail.
+posHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', ['Id', 'Name', 'Salary']).
+posLine() :- format('|~`-t~36||~n').
 
 % employee (id, position_id, first_name, last_name, birthday)
 employee(1, 7, 'Oliver', 'Smith', '6/21/1987').
@@ -70,7 +84,7 @@ employee(59, 1, 'Poppy', 'Murphy', '9/4/1984').
 employee(60, 3, 'Ella', 'Bailey', '9/27/1982').
 employee(61, 3, 'Lily', 'Rivera', '4/14/1986').
 employee(62, 3, 'Evie', 'Cooper', '8/14/1993').
-employee(63, 4, 'Isabella', 'Richardson', '10/13/1986').
+employee(63, 4, 'Isabella', 'Ross', '10/13/1986').
 employee(64, 6, 'Sophie', 'Cox', '11/7/1984').
 employee(65, 3, 'Ivy', 'Howard', '2/20/1992').
 employee(66, 3, 'Freya', 'Ward', '8/9/1987').
@@ -87,8 +101,8 @@ employee(76, 1, 'Florence', 'Price', '10/4/1989').
 employee(77, 3, 'Evelyn', 'Bennett', '11/21/1980').
 employee(78, 6, 'Phoebe', 'Wood', '6/3/1987').
 employee(79, 6, 'Aria', 'Barnes', '7/14/1980').
-employee(80, 6, 'Ruby', 'Ross', '7/16/1997').
-employee(81, 6, 'Isabelle', 'Henderson', '9/21/1986').
+employee(80, 6, 'Ruby', 'Richardson', '7/16/1997').
+employee(81, 6, 'Isabelle', 'Diaz', '9/21/1986').
 employee(82, 5, 'Esme', 'Coleman', '1/30/1990').
 employee(83, 5, 'Scarlett', 'Jenkins', '1/1/1990').
 employee(84, 4, 'Matilda', 'Perry', '5/7/1996').
@@ -106,12 +120,12 @@ employee(95, 4, 'Ellie', 'Bryant ', '1/15/1982').
 employee(96, 5, 'Mila', 'Alexander', '7/6/1986').
 employee(97, 3, 'Imogen', 'Russell', '8/27/1993').
 employee(98, 5, 'Bella', 'Griffin ', '5/10/1995').
-employee(99, 2, 'Lola', 'Diaz', '2/6/1996').
+employee(99, 2, 'Lola', 'Henderson', '2/6/1996').
 employee(100, 3, 'Molly', 'Hayes', '7/17/1996').
 
 % position (id, name, salary)
-position(1, 'Frontend Developer', 2500).
-position(2, 'Backend Developer', 3000).
+position(1, 'Web Developer', 3000).
+position(2, 'IOS Developer', 3100).
 position(3, 'QA', 1500).
 position(4, 'HR', 1350).
 position(5, 'PM', 4500).
