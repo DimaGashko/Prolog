@@ -24,7 +24,7 @@ run :- write('Loading data... '),
 readNext(end_of_file) :- done, nl, !.
 readNext(X) :- assert(X), read(Y), readNext(Y).
 
-save :- write('Saving...'),
+save :- write('Saving... '),
    (exists_file('db.txt'); write('Can\'t save data. DB file not found'), nl, fail),
    tell('db.txt'),
    findall(EmplId, employee(EmplId, _, _, _, _), EmplL), saveEmployees(EmplL), 
