@@ -12,14 +12,16 @@ guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('?- posAdd(Id, Name, Salary) '), nl,
    write('?- posEdit(Id, Name, Salary)'), nl,
    write('?- posDel(Id)'), nl,
-   write('- - - - - -'), nl,
-   write('?- guide()'), nl.
+   write('?- guide()'), nl,
+   write('?- save()'), nl.
 
 % Reading
-r :- see('db.txt'), read(X), readFile(X), seen().
+run :- write('Loading... '),
+   see('db.txt'), read(X), readNext(X), seen(), 
+   nl, nl, guide.
 
-readFile(end_of_file) :- write('End Of file. Done!'), !.
-readFile(X) :- write(X), assert(X), nl, read(Y), readFile(Y).
+readNext(end_of_file) :- write('Done!'), nl, !.
+readNext(X) :- assert(X), read(Y), readNext(Y).
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
