@@ -12,9 +12,12 @@ empl(Id) :- employee(Id, PosId, FN, LN, Birth),
    position(PosId, PosName, Salary),
    format('| ~a~t~5+ | ~a ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n', [Id, FN, LN, Birth, PosName, Salary]).
 
+emplDel(Id) :- retract(employee(Id, _, _, _, _)).
+emplAdd([Id, PosId, FN, LN, Birth]) :- position(PosId, _, _).
+
+emplLine() :- format('|~`-t~71||~n').
 emplAll() :- emplLine, emplHead, emplLine, empl(_), emplLine, fail.
 emplHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n', ['Id', 'Name', 'Birthday', 'Position', 'Salary']).
-emplLine() :- format('|~`-t~71||~n').
 
 % Position
 pos(Id) :- position(Id, Name, Salary), 
