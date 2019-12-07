@@ -18,13 +18,13 @@ emplDel(Id) :- (employee(Id, _, _, _, _); write('Employee not found')),
 emplAdd(Id, PosId, FN, LN, Birth) :- (not(employee(Id, _, _, _, _)); write('Employee already exist. Use ?- emplEdit() instead'), nl, fail),
    (position(PosId, _, _); write('Position not found'), nl, fail),
    assert(employee(Id, PosId, FN, LN, Birth)),
-   write('ok'), !.
+   write('Done!'), !.
 
 emplEdit(Id, PosId, FN, LN, Birth) :- (employee(Id, _, _, _, _); write('Employee not found'), nl, fail),
    (position(PosId, _, _); write('Position not found'), nl, fail),
    emplDel(Id),
    assert(employee(Id, PosId, FN, LN, Birth)),
-   write('ok'), !.
+   write('Done!'), !.
 
 emplLine() :- format('|~`-t~71||~n').
 emplAll() :- emplLine, emplHead, emplLine, empl(_), emplLine, fail.
@@ -37,7 +37,10 @@ pos(Id) :- position(Id, Name, Salary),
 posDel(Id) :- (position(Id, _, _); write('Position not found')),
    retract(position(Id, _, _)), !.
 
-posAdd(Id, Name, Salary) :- !.
+posAdd(Id, Name, Salary) :- (not(position(Id, _, _)); write('Position already exist. Use ?- posEdit() instead'), nl, fail),
+   assert(position(Id, Name, Salary)),
+   write('Done!'), !.
+
 posEdit(Id, Name, Salary) :- !.
 
 posAll() :- posLine, posHead, posLine, pos(_), posLine, fail.
