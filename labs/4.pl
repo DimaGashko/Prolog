@@ -41,7 +41,10 @@ posAdd(Id, Name, Salary) :- (not(position(Id, _, _)); write('Position already ex
    assert(position(Id, Name, Salary)),
    write('Done!'), !.
 
-posEdit(Id, Name, Salary) :- !.
+posEdit(Id, Name, Salary) :- (position(Id, _, _); write('Position not found'), nl, fail),
+   posDel(Id),
+   assert(position(Id, Name, Salary)),
+   write('Done!'), !.
 
 posAll() :- posLine, posHead, posLine, pos(_), posLine, fail.
 posHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', ['Id', 'Name', 'Salary']).
