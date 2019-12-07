@@ -15,13 +15,22 @@ guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('?- guide()'), nl,
    write('?- save()'), nl.
 
-% Run and Reading
+% Run, Read, Save
 run :- write('Loading... '),
    see('db.txt'), read(X), readNext(X), seen(), 
    nl, nl, guide.
 
 readNext(end_of_file) :- done, nl, !.
 readNext(X) :- assert(X), read(Y), readNext(Y).
+
+save :- write('Saving...'),
+   tell('db.txt'), saveEmployees, savePositions, told(), done, nl, !.
+
+saveEmployees :- employee(Id, PosId, FN, LN, Birth), 
+   write(employee(Id, PosId, FN, LN, Birth)), nl.
+
+savePositions :- position(Id, Name, Salary), 
+   write(position(Id, Name, Salary)), nl.
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
