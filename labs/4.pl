@@ -1,12 +1,11 @@
-run :- guide(), read(X), 
-   (X = 'asdf').
-
-dbHelp :- write('It is a help').
 
 guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
-   write('Enter command (use dbHelp() to see available commands)'), nl.
+   write('Available predicates:'), nl,
+   write('?- empl(Id) :- print employee by its id'), nl.
 
-getEmplPosId(EmplId, PosId) :- employee(EmplId, PosId, _, _, _), position(PosId, _, _).
+empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
+   position(PosId, PosName, Salary),
+   format('~a ~a: ~a, ~a, $~a', [FN, LN, Birth, PosName, Salary]).
 
 % employee (id, position_id, first_name, last_name, birthday)
 employee(1, 7, 'Oliver', 'Smith', '6/21/1987').
@@ -117,4 +116,4 @@ position(3, 'QA', 1500).
 position(4, 'HR', 1350).
 position(5, 'PM', 4500).
 position(6, 'CTO', 4500).
-position(7, 'SEO', 10000).
+position(7, 'CEO', 10000).
