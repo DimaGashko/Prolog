@@ -20,7 +20,7 @@ run :- write('Loading... '),
    see('db.txt'), read(X), readNext(X), seen(), 
    nl, nl, guide.
 
-readNext(end_of_file) :- write('Done!'), nl, !.
+readNext(end_of_file) :- done, nl, !.
 readNext(X) :- assert(X), read(Y), readNext(Y).
 
 % Employee
@@ -34,13 +34,13 @@ emplDel(Id) :- (employee(Id, _, _, _, _); write('Employee not found')),
 emplAdd(Id, PosId, FN, LN, Birth) :- (not(employee(Id, _, _, _, _)); write('Employee already exist. Use ?- emplEdit() instead'), nl, fail),
    (position(PosId, _, _); write('Position not found'), nl, fail),
    assert(employee(Id, PosId, FN, LN, Birth)),
-   write('Done!'), !.
+   done, !.
 
 emplEdit(Id, PosId, FN, LN, Birth) :- (employee(Id, _, _, _, _); write('Employee not found'), nl, fail),
    (position(PosId, _, _); write('Position not found'), nl, fail),
    emplDel(Id),
    assert(employee(Id, PosId, FN, LN, Birth)),
-   write('Done!'), !.
+   done, !.
 
 emplLine() :- format('|~`-t~71||~n').
 emplAll() :- emplLine, emplHead, emplLine, empl(_), emplLine, fail.
@@ -50,19 +50,22 @@ emplHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n'
 pos(Id) :- position(Id, Name, Salary), 
    format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', [Id, Name, Salary]).
 
-posDel(Id) :- ((position(Id, _, _); write('Position not found'))),
+posDel(Id) :- (position(Id, _, _); write('Position not found')),
    (not(employee(_, Id, _, _, _)); write('There are some employees on that position. Can\'t remove it.')),
    retract(position(Id, _, _)), !.
 
 posAdd(Id, Name, Salary) :- (not(position(Id, _, _)); write('Position already exist. Use ?- posEdit() instead'), nl, fail),
    assert(position(Id, Name, Salary)),
-   write('Done!'), !.
+   done, !.
 
 posEdit(Id, Name, Salary) :- ((position(Id, _, _); write('Position not found'), nl, fail)),
-   posDel(Id),
+   retract(position(Id, _, _)),
    assert(position(Id, Name, Salary)),
-   write('Done!'), !.
+   done, !.
 
 posAll() :- posLine, posHead, posLine, pos(_), posLine, fail.
 posHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', ['Id', 'Name', 'Salary']).
 posLine() :- format('|~`-t~36||~n').
+
+% Other
+done  :- write('Done!').
