@@ -29,10 +29,12 @@ save :- write('Saving...'), tell('db.txt'),
    told(), done, nl, !.
 
 saveEmployees([]) :- !.
-saveEmployees([Id|T]) :- write(Id), nl, saveEmployees(T).
+saveEmployees([Id|T]) :- employee(Id, PosId, FN, LN, Birth), 
+   writeq(employee(Id, PosId, FN, LN, Birth)), write('.'), nl, saveEmployees(T).
 
 savePositions([]) :- !.
-savePositions([Id|T]) :- write(Id), nl, savePositions(T).
+savePositions([Id|T]) :- position(Id, Name, Salary),
+   writeq(position(Id, Name, Salary)), write('.'), nl, savePositions(T).
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
