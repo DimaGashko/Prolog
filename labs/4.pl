@@ -34,6 +34,12 @@ emplHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n'
 pos(Id) :- position(Id, Name, Salary), 
    format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', [Id, Name, Salary]).
 
+posDel(Id) :- (position(Id, _, _); write('Position not found')),
+   retract(position(Id, _, _)), !.
+
+posAdd(Id, Name, Salary) :- !.
+posEdit(Id, Name, Salary) :- !.
+
 posAll() :- posLine, posHead, posLine, pos(_), posLine, fail.
 posHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', ['Id', 'Name', 'Salary']).
 posLine() :- format('|~`-t~36||~n').
