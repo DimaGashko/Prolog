@@ -15,7 +15,7 @@ guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('?- guide()'), nl,
    write('?- save()'), nl.
 
-% Reading
+% Run and Reading
 run :- write('Loading... '),
    see('db.txt'), read(X), readNext(X), seen(), 
    nl, nl, guide.
@@ -50,14 +50,15 @@ emplHead() :- format('| ~a~t~5+ | ~a~t~20+ | ~a~t~15+ | ~a~t~20+ | ~a~t~10+ |~n'
 pos(Id) :- position(Id, Name, Salary), 
    format('| ~a~t~5+ | ~a~t~20+ | ~a~t~10+ |~n', [Id, Name, Salary]).
 
-posDel(Id) :- (position(Id, _, _); write('Position not found')),
+posDel(Id) :- ((position(Id, _, _); write('Position not found'))),
+   (not(employee(_, Id, _, _, _)); write('There are some employees on that position. Can\'t remove it.')),
    retract(position(Id, _, _)), !.
 
 posAdd(Id, Name, Salary) :- (not(position(Id, _, _)); write('Position already exist. Use ?- posEdit() instead'), nl, fail),
    assert(position(Id, Name, Salary)),
    write('Done!'), !.
 
-posEdit(Id, Name, Salary) :- (position(Id, _, _); write('Position not found'), nl, fail),
+posEdit(Id, Name, Salary) :- ((position(Id, _, _); write('Position not found'), nl, fail)),
    posDel(Id),
    assert(position(Id, Name, Salary)),
    write('Done!'), !.
