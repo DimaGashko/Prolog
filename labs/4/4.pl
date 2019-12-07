@@ -1,4 +1,4 @@
-:-dynamic employee/5, position/3, test/1.
+:-dynamic employee/5, position/3.
 
 guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('Available predicates:'), nl,
@@ -23,14 +23,16 @@ run :- write('Loading... '),
 readNext(end_of_file) :- done, nl, !.
 readNext(X) :- assert(X), read(Y), readNext(Y).
 
-save :- write('Saving...'),
-   tell('db.txt'), saveEmployees, savePositions, told(), done, nl, !.
+save :- write('Saving...'), tell('db.txt'), 
+   saveEmployees, 
+   savePositions, 
+   told(), done, nl, !.
 
 saveEmployees :- employee(Id, PosId, FN, LN, Birth), 
-   write(employee(Id, PosId, FN, LN, Birth)), nl.
+   write(employee(Id, PosId, FN, LN, Birth)), nl, saveEmployees.
 
 savePositions :- position(Id, Name, Salary), 
-   write(position(Id, Name, Salary)), nl.
+   write(position(Id, Name, Salary)), nl, savePositions.
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
