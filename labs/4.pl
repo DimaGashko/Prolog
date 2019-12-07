@@ -2,10 +2,16 @@
 
 guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('Available predicates:'), nl,
-   write('?- empl(Id)    :- print employee by its id'), nl,
-   write('?- pos(Id)     :- print position by its id'), nl,
-   write('?- emplAll()   :- print all employees'), nl,
-   write('?- posAll(Id)  :- print all positions'), nl.
+   write('?- empl(Id)'), nl,
+   write('?- emplAll()'), nl,
+   write('?- emplAdd(Id, PosId, FN, LN, Birthday)'), nl,
+   write('?- emplEdit(Id, PosId, FM, LN, Birthday)'), nl,
+   write('?- emplDel(Id)'), nl,
+   write('?- pos(Id)'), nl,
+   write('?- posAll()'), nl,
+   write('?- posAdd(Id, Name, Salary) '), nl,
+   write('?- posEdit(Id, Name, Salary)'), nl,
+   write('?- posDel(Id)'), nl.
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
