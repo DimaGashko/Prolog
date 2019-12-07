@@ -100,3 +100,11 @@ employee(98, "Bella", "Griffin ", "5/10/1995", 5).
 employee(99, "Lola", "Diaz", "2/6/1996", 2).
 employee(100, "Molly", "Hayes", "7/17/1996", 3).
 
+% position (id, name, salary)
+position(1, "Frontend Developer", 2500);
+position(2, "Backend Developer", 3000);
+position(3, "QA", 1500);
+position(4, "HR", 1350);
+position(5, "PM", 4500);
+position(6, "CTO", 4500);
+position(7, "SEO", 10000);
