@@ -16,10 +16,10 @@ guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('?- guide()'), nl.
 
 % Reading
-r :- see('db.txt'), read(X), readEmplTable(X), seen().
+r :- see('db.txt'), read(X), readFile(X), seen().
 
-readEmplTable(end_of_file) :- write('End Of file. Done!'), !.
-readEmplTable(X) :- write(X), nl, read(Y), readEmplTable(Y).
+readFile(end_of_file) :- write('End Of file. Done!'), !.
+readFile(X) :- write(X), assert(X), nl, read(Y), readFile(Y).
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
