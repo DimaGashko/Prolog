@@ -105,4 +105,3 @@ position(4,'HR',1350).
 position(5,'PM',4500).
 position(6,'CTO',4500).
 position(7,'CEO',10000).
-position(8,"Designer",2000).

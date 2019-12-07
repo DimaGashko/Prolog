@@ -28,13 +28,13 @@ save :- write('Saving...'), tell('db.txt'),
    findall(PosId, position(PosId, _, _), PosL), savePositions(PosL), 
    told(), done, nl, !.
 
-saveEmployees([]) :- !.
-saveEmployees([Id|T]) :- employee(Id, PosId, FN, LN, Birth), 
-   writeq(employee(Id, PosId, FN, LN, Birth)), write('.'), nl, saveEmployees(T).
+saveEmployees(EmployeeIds) :- maplist(saveEmployee, EmployeeIds).
+saveEmployee(Id) :- employee(Id, PosId, FN, LN, Birth), 
+   writeq(employee(Id, PosId, FN, LN, Birth)), write('.'), nl.
 
-savePositions([]) :- !.
-savePositions([Id|T]) :- position(Id, Name, Salary),
-   writeq(position(Id, Name, Salary)), write('.'), nl, savePositions(T).
+savePositions(PositionIds) :- maplist(savePosition, PositionIds).
+savePosition(Id) :- position(Id, Name, Salary),
+   writeq(position(Id, Name, Salary)), write('.'), nl.
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
