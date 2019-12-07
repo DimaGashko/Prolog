@@ -1,4 +1,6 @@
-:-dynamic employee/5, position/3.
+:-dynamic employee/5, position/3, test/1.
+
+r :- 
 
 guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('Available predicates:'), nl,
@@ -11,7 +13,9 @@ guide :- write('* * * Prolog DB (v0.0.1) * * *'), nl, nl,
    write('?- posAll()'), nl,
    write('?- posAdd(Id, Name, Salary) '), nl,
    write('?- posEdit(Id, Name, Salary)'), nl,
-   write('?- posDel(Id)'), nl.
+   write('?- posDel(Id)'), nl,
+   write('- - - - - -'), nl,
+   write('?- guide()'), nl.
 
 % Employee
 empl(Id) :- employee(Id, PosId, FN, LN, Birth), 
